@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: nginx
+    restart: always
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile-nginx
+    volumes:
+      - ./src/:/var/www/symfony/
+    ports:
+      - 8001:80
+    networks:
+      - symfony
+
+  php:
+    container_name: php
+    restart: always
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile-php
+    environment:
+      APP_ENV: dev
+    volumes:
+      - ./src/:/var/www/symfony/
+    networks:
+      - symfony
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: mysql
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+    ports:
+      - 3306:3306
+    volumes:
+      - db-vol:/var/lib/mysql
+    networks:
+      - symfony
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    ports:
+      - 8081:80
+    depends_on:
+      - mysql
+    networks:
+      - symfony
+
+networks:
+  symfony:
+
+volumes:
+  db-vol:
