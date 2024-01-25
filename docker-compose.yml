@@ -11,6 +11,8 @@ services:
       - ./src/:/var/www/symfony/
     ports:
       - 8001:80
+    depends_on:
+      - php
     networks:
       - symfony
 
