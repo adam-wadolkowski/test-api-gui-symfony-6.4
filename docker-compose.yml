@@ -14,7 +14,7 @@ services:
     depends_on:
       - php
     networks:
-      - symfony
+      - blog
 
   php:
     container_name: php
@@ -27,7 +27,7 @@ services:
     volumes:
       - ./app/:/var/www/
     networks:
-      - symfony
+      - blog
     depends_on:
       - mysql
 
@@ -42,7 +42,7 @@ services:
     volumes:
       - db-vol:/var/lib/mysql
     networks:
-      - symfony
+      - blog
 
   phpmyadmin:
     container_name: phpmyadmin
@@ -53,12 +53,12 @@ services:
     ports:
       - 8081:80
     networks:
-      - symfony
+      - blog
     depends_on:
       - mysql
 
 networks:
-  symfony:
+  blog:
 
 volumes:
   db-vol:

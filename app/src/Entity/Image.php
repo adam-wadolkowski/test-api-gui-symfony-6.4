@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image
@@ -14,6 +17,13 @@ class Image
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+
+    #[Assert\NotBlank(message: "Please upload an image jpg type.")]
+    #[Assert\File(
+        maxSize: '1024k',
+        mimeTypes: ["image/jpg"],
+        mimeTypesMessage: 'Please upload a valid jpg image type.'
+    )]
     private ?string $file = null;
 
     public function getId(): ?int

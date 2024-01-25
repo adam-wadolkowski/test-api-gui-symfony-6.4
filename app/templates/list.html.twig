@@ -1,0 +1,20 @@
+{% if posts is empty %}
+    <h1>No post in blog.</h1>
+{% endif %}
+
+<table>
+    <tr>
+        <td>id</td>
+        <td>title</td>
+        <td>content</td>
+        <td>image</td>
+    </tr>
+    {% for post in posts %}
+        <tr>
+            <td>{{ post.id }}</td>
+            <td>{{ post.title }}</td>
+            <td>{{ post.content }}</td>
+            <td>{{ post.image }}</td>
+        </tr>
+    {% endfor %}
+</table>
