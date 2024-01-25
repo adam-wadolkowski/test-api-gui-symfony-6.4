@@ -47,13 +47,15 @@ services:
   phpmyadmin:
     container_name: phpmyadmin
     image: phpmyadmin/phpmyadmin:latest
+    environment:
+      PMA_ARBITRARY: 1
     restart: always
     ports:
       - 8081:80
-    depends_on:
-      - mysql
     networks:
       - symfony
+    depends_on:
+      - mysql
 
 networks:
   symfony:
