@@ -14,5 +14,5 @@ RUN docker-php-ext-install \
 
 RUN curl -sS http://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
-COPY src/ /var/www
+COPY app/ /var/www
 WORKDIR /var/www
