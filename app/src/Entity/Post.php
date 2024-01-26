@@ -31,6 +31,7 @@ class Post
 //    private ?string $uuid = null;
 
     #[ORM\Column(type: Types::STRING, length: 80)]
+    #[Assert\NotBlank(message: "Post title not by blank.")]
     #[Assert\Length(
         min: 10,
         max: 80,
@@ -40,6 +41,7 @@ class Post
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: "Post content not by blank.")]
     #[Assert\Length(
         min: 20,
         minMessage: 'Post content must be at least {{ limit }} characters long.'

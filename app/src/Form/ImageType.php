@@ -16,6 +16,7 @@ class ImageType extends FileType
 {
     public function __construct(readonly private string $imagePath)
     {
+        parent::__construct();
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

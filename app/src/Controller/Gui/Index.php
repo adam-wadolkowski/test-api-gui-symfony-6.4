@@ -11,6 +11,7 @@ use App\Form\PostBlogType;
 use App\Repository\PostRepository;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
+use Faker\Factory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,10 +36,12 @@ class Index extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $faker = Factory::create();
+            $post->setImage($faker->image(format: 'jpg'));
             $em->persist($post);
             $em->flush();
 
-            return $this->redirectToRoute('project_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('list_blog_posts', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('new.html.twig', [
@@ -46,16 +49,16 @@ class Index extends AbstractController
             'form' => $form,
         ]);
 
-        $image = new Image();
-        $form = $this->createForm(ImageType::class, $image);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($form->getData());
-            $em->flush();
-            return $this->redirectToRoute('project_index');
-        }
-        return $this->render('new.html.twig', [
-            'form' => $form->createView()
-        ]);
+//        $image = new Image();
+//        $form = $this->createForm(ImageType::class, $image);
+//        $form->handleRequest($request);
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $em->persist($form->getData());
+//            $em->flush();
+//            return $this->redirectToRoute('list_blog_posts');
+//        }
+//        return $this->render('new.html.twig', [
+//            'form' => $form->createView()
+//        ]);
     }
 }
