@@ -4,9 +4,15 @@ declare(strict_types=1);
 
 namespace App\Controller\Gui;
 
+use App\Entity\Image;
+use App\Entity\Post;
+use App\Form\ImageType;
+use App\Form\PostBlogType;
 use App\Repository\PostRepository;
 use Doctrine\DBAL\Exception;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -17,21 +23,39 @@ class Index extends AbstractController
     public function listing(PostRepository $post): Response
     {
         return $this->render('list.html.twig', [
-            'posts' => $post->getAll(),
+            'posts' => $post->getAll()
         ]);
     }
 
-    #[Route('/new', name: 'add_blog_post', methods: ['GET'])]
-    public function add(): Response
+    #[Route('/new', name: 'add_blog_post', methods: ['GET', 'POST'])]
+    public function add(Request $request, EntityManagerInterface $em): Response
     {
-//        if (count($errors) > 0) {
-//            return $this->render('validation.html.twig', [
-//                'errors' => $errors,
-//            ]);
-//        }
-//
-//        return $this->render('new.html.twig', [
-//            'number' => random_int(0, 100),
-//        ]);
+        $post = new Post();
+        $form = $this->createForm(PostBlogType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($post);
+            $em->flush();
+
+            return $this->redirectToRoute('project_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('new.html.twig', [
+            'post' => $post,
+            'form' => $form,
+        ]);
+
+        $image = new Image();
+        $form = $this->createForm(ImageType::class, $image);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($form->getData());
+            $em->flush();
+            return $this->redirectToRoute('project_index');
+        }
+        return $this->render('new.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }

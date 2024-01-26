@@ -15,7 +15,7 @@ class Post
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
 //    #[ORM\Id]
@@ -30,7 +30,7 @@ class Post
 //    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
 //    private ?string $uuid = null;
 
-    #[ORM\Column(length: 80)]
+    #[ORM\Column(type: Types::STRING, length: 80)]
     #[Assert\Length(
         min: 10,
         max: 80,
