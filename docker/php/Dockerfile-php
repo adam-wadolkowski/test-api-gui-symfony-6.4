@@ -10,9 +10,11 @@ RUN docker-php-ext-install \
       zip \
       intl \
       mysqli \
-      pdo pdo_mysql
+      pdo \
+      pdo_mysql
 
 RUN curl -sS http://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
 COPY app/ /var/www
 WORKDIR /var/www
+RUN composer install

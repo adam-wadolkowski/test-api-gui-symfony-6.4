@@ -1,35 +1,3 @@
-{#{% extends 'base.html.twig' %}#}
-
-{#{% block title %}Show blog posts{% endblock %}#}
-
-{#{% block body %}#}
-{#    {% if posts is empty %}#}
-{#        <h1>No post in blog.</h1>#}
-{#    {% endif %}#}
-
-{#    <a class="btn btn-outline-primary" href="{{ path('add_blog_post') }}">#}
-{#        Add new post on blog#}
-{#    </a>#}
-
-{#    <table>#}
-{#        <tr>#}
-{#            <td>id</td>#}
-{#            <td>title</td>#}
-{#            <td>content</td>#}
-{#            <td>image</td>#}
-{#        </tr>#}
-{#        {% for post in posts %}#}
-{#            <tr>#}
-{#                <td>{{ post.id }}</td>#}
-{#                <td>{{ post.title }}</td>#}
-{#                <td>{{ post.content }}</td>#}
-{#                <td>{{ post.image }}</td>#}
-{#            </tr>#}
-{#        {% endfor %}#}
-{#    </table>#}
-{#{% endblock %}#}
-
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Show blog posts{% endblock %}
@@ -63,6 +31,9 @@
                         </tr>
                     {% endfor %}
                 </table>
+                {% if posts is empty %}
+                    <h5>No posts in blog.</h5>
+                {% endif %}
             </div>
         </div>
     </div>
