@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nginx:
-    container_name: nginx
+    container_name: blog_nginx
     restart: always
     build:
       context: .
@@ -17,7 +17,7 @@ services:
       - blog
 
   php:
-    container_name: php
+    container_name: blog_php
     restart: always
     build:
       context: .
@@ -32,7 +32,7 @@ services:
       - mysql
 
   mysql:
-    container_name: mysql
+    container_name: blog_mysql
     image: mysql
     restart: always
     environment:
@@ -45,10 +45,12 @@ services:
       - blog
 
   phpmyadmin:
-    container_name: phpmyadmin
+    container_name: blog_phpmyadmin
     image: phpmyadmin/phpmyadmin:latest
     environment:
-      PMA_ARBITRARY: 1
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: toor
     restart: always
     ports:
       - 8081:80
@@ -56,6 +58,20 @@ services:
       - blog
     depends_on:
       - mysql
+
+  mailhog:
+    container_name: blog_mailhog
+    image: mailhog/mailhog
+    logging:
+      driver: 'none'
+    restart: always
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      - blog
+    depends_on:
+      - php
 
 networks:
   blog:

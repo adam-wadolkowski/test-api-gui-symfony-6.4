@@ -1,4 +1,4 @@
-shell = @docker exec -it php
+shell = @docker exec -it blog_php
 console = @$(shell) bin/console
 chown = @sudo chown -R $$USER:$$USER app/
 
@@ -14,7 +14,7 @@ setup: #for develop - create migrations and load fixtures
 	$(console) doctrine:migrations:migrate
 	$(console) doctrine:fixtures:load
 
-init: # initialize project
+init: #initialize project
 	@docker-compose up -d
 	$(shell) composer install
 	$(chown)
@@ -23,46 +23,45 @@ init: # initialize project
 	$(console) doctrine:migrations:migrate
 	@docker-compose ps -a
 
-fixture: # load only fixture
+fixture: #load only fixture
 	@docker-compose up -d
 	$(chown)
 	$(console) doctrine:fixtures:load
 
-shell: # run shell in code container
+shell: #run shell in code container
 	@docker-compose up -d
 	@docker exec -it php bash
 
-status:
+status: #show status projects containers
+	@docker-compose ps -a
+
+status-all: #show status all containers
 	@docker ps -a
 
-up:
+up: #up all project containers
 	@docker-compose up -d
 	@docker-compose ps -a
 
-down:
+down: #down all project containers
 	@docker-compose down
 	@docker ps -a
 
-down-all:
+down-all: #down all containers in native system
 	@docker stop $$(docker ps -a -q)
 	@docker rm $$(docker ps -a -q)
 	@docker ps -a
 
-permissions:
+permissions: #change permission to edit project code
 	$(chown)
 
-clean-cache:
+clean-cache: #remove file from var/cache/ in project
 	@rm -rf app/var/cache/*
 
-#clean:
-#	@rm -rf app/var/cache/*
-#	@rm .phpcs-cache
-
-cs:
+cs: #run snifer code
 	#@rm .phpcs-cache
 	@docker-compose up -d
 	$(shell) vendor/bin/phpcs -p --standard=phpcs.xml
 
-cs-fix:
+cs-fix: #run fixer snifer code
 	@docker-compose up -d
 	$(shell) vendor/bin/phpbf -p --standard=phpcs.xml
