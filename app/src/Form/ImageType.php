@@ -23,12 +23,12 @@ class ImageType extends FileType
     {
         parent::buildForm($builder, $options);
         $builder->addModelTransformer(new CallbackTransformer(
-            function(Image $image = null) {
+            function (Image $image = null) {
                 if ($image instanceof Image) {
                     return new File($this->imagePath . $image->getFile());
                 }
             },
-            function(UploadedFile $uploadedFile = null) {
+            function (UploadedFile $uploadedFile = null) {
                 if ($uploadedFile instanceof UploadedFile) {
                     $image = new Image();
                     $image->setFile($uploadedFile);

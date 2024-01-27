@@ -64,4 +64,4 @@ cs: #run snifer code
 
 cs-fix: #run fixer snifer code
 	@docker-compose up -d
-	$(shell) vendor/bin/phpcbf -vv --standard=phpcs.xml
+	$(shell) vendor/bin/phpcbf --standard=phpcs.xml

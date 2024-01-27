@@ -17,7 +17,7 @@ class BlogPostsFixtures extends Fixture
 
         for ($i = 0; $i < 10; $i++) {
             $postBlog = new Post();
-            $postBlog->setTitle($faker->realTextBetween(10,80))
+            $postBlog->setTitle($faker->realTextBetween(10, 80))
                 ->setContent($faker->realTextBetween(20))
                 ->setImage($faker->image(format: 'jpg'));
 

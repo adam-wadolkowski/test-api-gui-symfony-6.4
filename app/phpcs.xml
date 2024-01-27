@@ -19,6 +19,8 @@
     <rule ref="PSR12"/>
 <!--    <rule ref="SlevomatCodingStandard"/>-->
 
+    <!--    <exclude-pattern>.fixtures/*</exclude-pattern>-->
+
     <file>tests/</file>
     <file>public/</file>
     <file>src/</file>
@@ -31,11 +33,12 @@
 <!--        <exclude name="SlevomatCodingStandard.Classes.UnusedPrivateElements.UnusedConstant"/>-->
 <!--    </rule>-->
 
-    <!--    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes" >-->
-<!--        <properties>-->
-<!--&lt;!&ndash;            <property name="spacesCountAroundEqualsSign" value="0"/>&ndash;&gt;-->
-<!--            <property name="declareOnFirstLine" value="true"/>-->
-<!--            <property name="linesCountAfterDeclare" value="1"/>-->
-<!--        </properties>-->
-<!--    </rule>-->
+        <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes" >
+        <properties>
+<!--            <property name="spacesCountAroundEqualsSign" value="0"/>-->
+<!--            <property name="newlinesCountBetweenOpenTagAndDeclare" value="1"/>-->
+            <property name="declareOnFirstLine" value="true"/>
+            <property name="linesCountAfterDeclare" value="1"/>
+        </properties>
+    </rule>
 </ruleset>
