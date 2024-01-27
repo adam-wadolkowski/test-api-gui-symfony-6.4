@@ -30,7 +30,7 @@ fixture: #load only fixture
 
 shell: #run shell in code container
 	@docker-compose up -d
-	@docker exec -it php bash
+	$(shell) bash
 
 status: #show status projects containers
 	@docker-compose ps -a
@@ -60,8 +60,8 @@ clean-cache: #remove file from var/cache/ in project
 cs: #run snifer code
 	#@rm .phpcs-cache
 	@docker-compose up -d
-	$(shell) vendor/bin/phpcs -p --standard=phpcs.xml
+	$(shell) vendor/bin/phpcs --standard=phpcs.xml
 
 cs-fix: #run fixer snifer code
 	@docker-compose up -d
-	$(shell) vendor/bin/phpcbf -p --standard=phpcs.xml
+	$(shell) vendor/bin/phpcbf -vv --standard=phpcs.xml

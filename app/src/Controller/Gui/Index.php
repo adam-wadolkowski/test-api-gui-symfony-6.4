@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Gui;
 
-use App\Entity\Image;
+//use App\Entity\Image;
 use App\Entity\Post;
-use App\Form\ImageType;
+//use App\Form\ImageType;
 use App\Form\PostBlogType;
 use App\Repository\PostRepository;
 use Doctrine\DBAL\Exception;
