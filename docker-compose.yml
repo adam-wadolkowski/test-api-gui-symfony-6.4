@@ -61,7 +61,7 @@ services:
 
   mailhog:
     container_name: blog_mailhog
-    image: mailhog/mailhog
+    image: mailhog/mailhog:latest
     logging:
       driver: 'none'
     restart: always
