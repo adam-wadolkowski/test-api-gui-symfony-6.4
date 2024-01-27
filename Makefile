@@ -40,7 +40,7 @@ up:
 	@docker-compose ps -a
 
 down:
-	@@docker-compose down
+	@docker-compose down
 	@docker ps -a
 
 down-all:
@@ -53,3 +53,16 @@ permissions:
 
 clean-cache:
 	@rm -rf app/var/cache/*
+
+#clean:
+#	@rm -rf app/var/cache/*
+#	@rm .phpcs-cache
+
+cs:
+	#@rm .phpcs-cache
+	@docker-compose up -d
+	$(shell) vendor/bin/phpcs -p --standard=phpcs.xml
+
+cs-fix:
+	@docker-compose up -d
+	$(shell) vendor/bin/phpbf -p --standard=phpcs.xml
