@@ -12,7 +12,7 @@
                 </a>
             </div>
             <div class="card-body">
-                <h5 class="card-title">Total number of posts: {{ posts|length }}</h5>
+                <h5 class="card-title">Total number of posts: {{ paginator.items|length }}</h5>
                 <table class="table table-bordered">
                     <tr>
                         <th>Id</th>
@@ -21,7 +21,7 @@
                         <th>Image</th>
 {#                        <th>Date Created</th>#}
                     </tr>
-                    {% for post in posts %}
+                    {% for post in paginator.items %}
                         <tr>
                             <td>{{ post.id }}</td>
                             <td>{{ post.title }}</td>
@@ -31,11 +31,13 @@
                         </tr>
                     {% endfor %}
                 </table>
-                {% if posts is empty %}
+                {% if paginator.items is empty %}
                     <h5>No posts in blog.</h5>
                 {% endif %}
             </div>
         </div>
     </div>
+
+    {% include 'paginator.html.twig' %}
 
 {% endblock %}
