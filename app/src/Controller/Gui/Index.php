@@ -9,7 +9,7 @@ use App\Entity\Post;
 //use App\Form\ImageType;
 use App\Form\PostBlogType;
 use App\Repository\PostRepository;
-use App\Service\PosService;
+use App\Service\PostService;
 use Doctrine\DBAL\Exception;
 use Faker\Factory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,7 +31,7 @@ class Index extends AbstractController
 
     /** @throws TransportExceptionInterface */
     #[Route('/new', name: 'add_blog_post', methods: ['GET', 'POST'])]
-    public function add(Request $request, PosService $postService): Response
+    public function add(Request $request, PostService $postService): Response
     {
         $post = new Post();
         $form = $this->createForm(PostBlogType::class, $post);
