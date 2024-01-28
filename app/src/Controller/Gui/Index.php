@@ -24,7 +24,9 @@ class Index extends AbstractController
     public function index(Request $request, PostService $postService): Response
     {
         return $this->render('index.html.twig', [
-            'paginator' => $postService->getPaginatePosts($request->query->getInt('page', 1)),
+            'paginator' => $postService->getPaginatePosts(
+                $request->query->getInt('page', 1)
+            )
         ]);
     }
 

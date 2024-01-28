@@ -1,4 +1,5 @@
-{% set _currentPage = app.request.query.get('page') ?: 1 %}
+{#{% set _currentPage = app.request.query.get('page') ?: 1 %}#}
+{% set _currentPage = paginator.currentPage %}
 {% set _currentRoute = app.request.attributes.get('_route') %}
 {% set _lastPage = paginator.lastPage %}
 {% set _currentParams = app.request.query.all|merge(app.request.attributes.get('_route_params')) %}
