@@ -6,8 +6,8 @@ namespace App\Repository;
 
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\DBAL\Exception;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+//use Doctrine\DBAL\Exception;
+//use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 final class PostRepository extends ServiceEntityRepository
@@ -16,6 +16,8 @@ final class PostRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Post::class);
     }
+
+
 
 //    public function getPaginatedPosts(int $page = 1, int $postsPerPage = 9)
 //    {
@@ -29,10 +31,10 @@ final class PostRepository extends ServiceEntityRepository
 //        return $paginator->getIterator();
 //    }
 
-    /** @throws Exception */
-    public function getAll(): array
-    {
-        return $this->findAll();
+//    /** @throws Exception */
+//    public function getAll(): array
+//    {
+//        return $this->findAll();
 //        return $this->getEntityManager()
 //            ->createQuery(
 //                'SELECT p FROM AppBundle:Blog'
@@ -47,5 +49,5 @@ final class PostRepository extends ServiceEntityRepository
 //                'SELECT p FROM AppBundle:Product p ORDER BY p.name ASC'
 //            )
 //            ->getResult();
-    }
+//    }
 }
