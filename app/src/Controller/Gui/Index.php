@@ -21,14 +21,10 @@ use Symfony\Component\Routing\Attribute\Route;
 class Index extends AbstractController
 {
     #[Route('/', name: 'list_blog_posts', methods: ['GET'])]
-    public function index(Request $request): Response
+    public function index(Request $request, PostService $postService): Response
     {
-        $page = $request->query->getInt('page', 1);
-        $query = $em->getRepository(Post::class)->createQueryBuilder('p');
-        $paginator->paginate($query, $page);
-
-        return $this->render('list.html.twig', [
-            'paginator' => $paginator,
+        return $this->render('index.html.twig', [
+            'paginator' => $postService->getPaginatePosts($request->query->getInt('page', 1)),
         ]);
     }
 

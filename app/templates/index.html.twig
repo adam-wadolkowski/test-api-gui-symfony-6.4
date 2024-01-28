@@ -12,7 +12,7 @@
                 </a>
             </div>
             <div class="card-body">
-                <h5 class="card-title">Total number of posts: {{ paginator.items|length }}</h5>
+                <h5 class="card-title">Total number of posts: {{ paginator.getTotal }}</h5>
                 <table class="table table-bordered">
                     <tr>
                         <th>Id</th>

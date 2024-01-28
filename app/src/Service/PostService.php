@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Entity\Post;
+use App\Repository\PostRepository;
 use App\ValueObject\EmailSettingsVO;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -14,7 +15,9 @@ readonly class PostService
 {
     public function __construct(
         private EntityManagerInterface $em,
-        private EmailService $email
+        private EmailService $email,
+        private PostRepository $post,
+        private Paginator $paginator
     ) {
     }
 
@@ -36,5 +39,10 @@ readonly class PostService
         );
 
         $this->email->send($postEmail);
+    }
+
+    public function getPaginatePosts(int $pageNumber)
+    {
+        return $this->paginator->paginate($this->post->createQueryBuilder('p'), $pageNumber);
     }
 }
