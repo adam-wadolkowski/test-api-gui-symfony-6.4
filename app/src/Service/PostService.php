@@ -41,8 +41,8 @@ readonly class PostService
         $this->email->send($postEmail);
     }
 
-    public function getPaginatePosts(int $pageNumber)
+    public function getPaginatePosts(int $pageNumber): Paginator
     {
-        return $this->paginator->paginate($this->post->createQueryBuilder('p'), $pageNumber);
+        return $this->paginator->paginate($this->post->getPostsQuery(), $pageNumber);
     }
 }

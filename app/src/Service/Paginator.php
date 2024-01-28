@@ -41,7 +41,7 @@ class Paginator
         return $this->lastPage;
     }
 
-    public function getItems()
+    public function getItems(): OrmPaginator
     {
         return $this->items;
     }

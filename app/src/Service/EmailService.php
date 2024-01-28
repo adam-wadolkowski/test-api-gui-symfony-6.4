@@ -29,7 +29,7 @@ readonly class EmailService
         //try {
             $this->mailer->send($email);
         //} catch (TransportExceptionInterface) {
-        // @TODO Save errors in logs. Try resend email when use sending messages async. Use FailedMessageEvent.
+        // @TODO Save errors in logs this place use e.g. Monolog or save other place use FailedMessageEvent. Try resend email when use sending messages async to use messenger or other massage broker.
         //}
     }
 }
