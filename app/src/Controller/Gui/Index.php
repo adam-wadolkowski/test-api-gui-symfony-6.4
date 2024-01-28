@@ -9,14 +9,13 @@ use App\Entity\Post;
 //use App\Form\ImageType;
 use App\Form\PostBlogType;
 use App\Repository\PostRepository;
+use App\Service\PosService;
 use Doctrine\DBAL\Exception;
-use Doctrine\ORM\EntityManagerInterface;
 use Faker\Factory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 class Index extends AbstractController
@@ -30,8 +29,9 @@ class Index extends AbstractController
         ]);
     }
 
+    /** @throws TransportExceptionInterface */
     #[Route('/new', name: 'add_blog_post', methods: ['GET', 'POST'])]
-    public function add(Request $request, EntityManagerInterface $em, MailerInterface $mailer): Response
+    public function add(Request $request, PosService $postService): Response
     {
         $post = new Post();
         $form = $this->createForm(PostBlogType::class, $post);
@@ -40,22 +40,9 @@ class Index extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $faker = Factory::create();
             $post->setImage($faker->image(format: 'jpg'));
-            $em->persist($post);
-            $em->flush();
 
-
-            $email = (new Email())
-                ->from('hello@example.com')
-                ->to('you@example.com')
-                //->cc('cc@example.com')
-                //->bcc('bcc@example.com')
-                //->replyTo('fabien@example.com')
-                //->priority(Email::PRIORITY_HIGH)
-                ->subject('Time for Symfony Mailer!')
-                ->text('Sending emails is fun again!')
-                ->html('<p>See Twig integration for better HTML integration!</p>');
-
-            $mailer->send($email);
+            $postService->save($post);
+            $postService->sendEmail();
 
             return $this->redirectToRoute('list_blog_posts', [], Response::HTTP_SEE_OTHER);
         }

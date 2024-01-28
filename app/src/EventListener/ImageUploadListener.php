@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\EventListener;
 
 use App\Entity\Image;
-use App\Service\FileUploader;
+use App\Service\FileUploaderService;
 //use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 readonly class ImageUploadListener
 {
-    public function __construct(public FileUploader $uploader)
+    public function __construct(public FileUploaderService $uploader)
     {
     }
 //    public function prePersist(LifecycleEventArgs $args): void

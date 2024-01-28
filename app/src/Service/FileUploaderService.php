@@ -6,7 +6,7 @@ namespace App\Service;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-readonly class FileUploader
+readonly class FileUploaderService
 {
     public function __construct(private string $targetDirectory)
     {

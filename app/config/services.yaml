@@ -29,7 +29,7 @@ services:
  #           - '%kernel.project_dir%/public/uploads/images'
             - '%image_directory%'
 
-    App\Service\FileUploader:
+    App\Service\FileUploaderService:
         arguments:
 #            $targetDirectory: '%env(string:IMAGE_DIRECTORY)%'
             $targetDirectory: '%image_directory%'
