@@ -14,8 +14,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'add-post',
-    description: 'Add one post',
+    name: 'post:add',
+    description: 'Add one post in cli',
 )]
 class AddPostCommand extends Command
 {
@@ -60,7 +60,7 @@ class AddPostCommand extends Command
         $this->em->persist($post);
         $this->em->flush();
 
-        $io->success(sprintf('Post %s is saved.', $post->getId()));
+        $io->success(sprintf('Post id: %s is saved.', $post->getId()));
 
         return Command::SUCCESS;
     }
