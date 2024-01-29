@@ -16,6 +16,7 @@ class Paginator
     private OrmPaginator $items;
 
     private const FIRST_PAGE_NUMBER = 1;
+    private const ZERO_PAGE_NUMBER = 0;
     private const DEFAULT_LIMIT_ITEMS_ON_PAGE = 5;
 
     public function paginate(QueryBuilder|Query $query, int $page, int $limit = self::DEFAULT_LIMIT_ITEMS_ON_PAGE): Paginator
@@ -39,11 +40,11 @@ class Paginator
 
     public function getPossibleNumberPage(int $currentPage, int $maxItems, int $pageLimit): int
     {
-        if ($pageLimit <= 0) {
+        if ($pageLimit <= self::ZERO_PAGE_NUMBER) {
             $pageLimit = self::DEFAULT_LIMIT_ITEMS_ON_PAGE;
         }
 
-        if ($currentPage <= 0) {
+        if ($currentPage <= self::ZERO_PAGE_NUMBER) {
             return self::FIRST_PAGE_NUMBER;
         }
 

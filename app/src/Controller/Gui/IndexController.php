@@ -8,7 +8,6 @@ namespace App\Controller\Gui;
 use App\Entity\Post;
 use App\Form\PostBlogType;
 use App\Service\PostService;
-use Doctrine\DBAL\Exception;
 use Faker\Factory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +17,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 //use App\Form\ImageType;
 
-class Index extends AbstractController
+class IndexController extends AbstractController
 {
     #[Route('/', name: 'list_blog_posts', methods: ['GET'])]
     public function index(Request $request, PostService $postService): Response
