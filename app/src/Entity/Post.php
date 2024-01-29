@@ -81,6 +81,7 @@ class Post
 
     public function setTitle(string $title): static
     {
+        // $this->title = strip_tags($title, '<ul><li><ol><p><strong>');
         $this->title = $title;
 
         return $this;
@@ -94,6 +95,7 @@ class Post
     public function setContent(string $content): static
     {
         $this->content = $content;
+        //$this->content = strip_tags($content, '<ul><li><ol><p><strong>');
 
         return $this;
     }
