@@ -9,7 +9,7 @@ use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 
 #[AsDoctrineListener('prePersist'/*, 500, 'default'*/)]
-class PrePersistEntityListener
+class PrePersistPostEntityListener
 {
     private const ALLOWED_TAGS = '<ul><li><ol><p><strong>';
 
