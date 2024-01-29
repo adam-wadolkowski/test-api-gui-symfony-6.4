@@ -1,20 +1,29 @@
 FROM php:8.3.2-fpm-bookworm
 
-RUN apt-get update && apt-get install -y && apt-get install -y --no-install-recommends \
-      git \
-      zlib1g-dev \
-      libxml2-dev \
-      libzip-dev
+RUN apt update && apt install -y
+RUN apt install -y --no-install-recommends \
+    gnupg2 \
+    git \
+    zlib1g-dev \
+    libxml2-dev \
+    libzip-dev
 
 RUN docker-php-ext-install \
-      zip \
-      intl \
-      mysqli \
-      pdo \
-      pdo_mysql
+    zip \
+    intl \
+    mysqli \
+    pdo \
+    pdo_mysql
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt update && apt install -y yarn
+#RUN yarn install
+#RUN yarn encore dev
 
 RUN curl -sS http://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
 COPY app/ /var/www
 WORKDIR /var/www
-RUN composer install
+
+#RUN composer install

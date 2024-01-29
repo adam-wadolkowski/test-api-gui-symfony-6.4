@@ -7,6 +7,7 @@ help: #show list command in make
 
 setup: #for develop - create migrations and load fixtures
 	@docker-compose up -d
+	$(shell) composer install
 	$(chown)
 	$(console) doctrine:database:drop --force
 	$(console) doctrine:database:create
@@ -16,6 +17,7 @@ setup: #for develop - create migrations and load fixtures
 
 init: #initialize project
 	@docker-compose up -d
+	$(shell) sh -c 'yarn install && yarn encore dev'
 	$(shell) composer install
 	$(chown)
 	$(console) doctrine:database:drop --force
@@ -56,6 +58,11 @@ permissions: #change permission to edit project code
 
 clean-cache: #remove file from var/cache/ in project
 	@rm -rf app/var/cache/*
+
+clean-hard:
+	@docker-compose down
+	@sudo rm -rf app/var app/vendor app/node_modules app/public/build app/public/bundles
+	@docker ps -a
 
 cs: #run snifer code
 	#@rm .phpcs-cache
