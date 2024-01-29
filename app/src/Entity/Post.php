@@ -49,8 +49,7 @@ class Post
     private ?string $content = null;
 
     #[ORM\Column]
-    #[ORM\OneToOne(targetEntity: Image::class, cascade: ["persist"])]
-    #[ORM\JoinColumn(name: "image_id", referencedColumnName: "id")]
+    #[ORM\OneToOne(mappedBy: "post", targetEntity: Image::class, cascade: ['persist','merge', 'remove'], fetch: 'LAZY', orphanRemoval: true)]
     private ?string $image = null;
 
 //    public function __construct()

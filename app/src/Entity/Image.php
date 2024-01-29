@@ -6,6 +6,8 @@ namespace App\Entity;
 
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToOne;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -26,6 +28,10 @@ class Image
         mimeTypesMessage: 'Please upload a valid jpg image type.'
     )]
     private ?UploadedFile $file = null;
+
+    #[OneToOne(inversedBy: "comments", targetEntity: Post::class)]
+    #[JoinColumn(name: "post_id", referencedColumnName: "id")]
+    private Post $post;
 
     public function getId(): ?int
     {

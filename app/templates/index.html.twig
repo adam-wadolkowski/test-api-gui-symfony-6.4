@@ -19,17 +19,19 @@
                         <th>Title</th>
                         <th>Content</th>
                         <th>Image</th>
-{#                        <th>Date Created</th>#}
+                        {#                        <th>Date Created</th> #}
                     </tr>
-                    {% for post in paginator.items %}
-                        <tr>
-                            <td>{{ post.id }}</td>
-                            <td>{{ post.title }}</td>
-                            <td>{{ post.content }}</td>
-                            <td>{{ post.image }}</td>
-{#                            <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>#}
-                        </tr>
-                    {% endfor %}
+                    {% if paginator.items|length > 0 %}
+                        {% for post in paginator.items %}
+                            <tr>
+                                <td>{{ post.id }}</td>
+                                <td>{{ post.title }}</td>
+                                <td>{{ post.content }}</td>
+                                <td>{{ post.image }}</td>
+                                {#                            <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td> #}
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
                 </table>
                 {% if paginator.items is empty %}
                     <h5>No posts in blog.</h5>
