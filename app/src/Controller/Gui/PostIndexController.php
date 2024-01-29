@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 //use App\Form\ImageType;
 
-class IndexController extends AbstractController
+class PostIndexController extends AbstractController
 {
     #[Route('/', name: 'list_blog_posts', methods: ['GET'])]
     public function index(Request $request, PostService $postService): Response

@@ -6,7 +6,7 @@ namespace App\ValueObject;
 
 use Symfony\Component\Mime\Address;
 
-readonly class EmailSettingsVO
+final readonly class EmailSettingsVO
 {
     public function __construct(
         public Address $from,
