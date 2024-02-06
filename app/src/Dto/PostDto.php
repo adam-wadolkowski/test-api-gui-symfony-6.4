@@ -29,11 +29,11 @@ readonly class PostDto
         #[Assert\NotBlank(message: "Please upload an image jpg mime type.")]
         #[Assert\File(
             maxSize: '1024k',
-            mimeTypes: ["image/jpg", "image/jpeg"],
-            //mimeTypesMessage: 'Please upload a valid jpg image mime type.'
+            mimeTypes: ["image/jpg"],
+            mimeTypesMessage: 'Please upload a valid jpg image mime type.'
         )]
+        //public ?UploadedFile $image,
         public ?string $image,
-        //public UploadedFile $image,
     ) {
     }
 }
