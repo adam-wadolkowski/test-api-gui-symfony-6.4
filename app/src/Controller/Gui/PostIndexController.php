@@ -6,9 +6,9 @@ namespace App\Controller\Gui;
 
 //use App\Entity\Image;
 use App\Entity\Post;
-use App\Form\PostBlogType;
+use App\Form\PostType;
+use App\Service\FileUploaderService;
 use App\Service\PostService;
-use Faker\Factory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,15 +31,19 @@ class PostIndexController extends AbstractController
 
     /** @throws TransportExceptionInterface */
     #[Route('/new', name: 'add_blog_post', methods: ['GET', 'POST'])]
-    public function add(Request $request, PostService $postService): Response
+    public function add(Request $request, PostService $postService, FileUploaderService $fileUploaderService): Response
     {
         $post = new Post();
-        $form = $this->createForm(PostBlogType::class, $post);
+        $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $faker = Factory::create();
-            $post->setImage($faker->image(format: 'jpg'));
+
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $imageFileName = $fileUploaderService->upload($imageFile);
+                $post->setImage($imageFileName);
+            }
 
             $postService->save($post);
             $postService->sendEmail();

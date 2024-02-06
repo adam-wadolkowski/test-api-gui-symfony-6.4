@@ -73,10 +73,10 @@ services:
     depends_on:
       - php
 
-  rabbitmq:
-    container_name: blog_rabbitmq
-    image: rabbitmq:3-management
-    ports: [ 5672, 15672 ]
+#  rabbitmq:
+#    container_name: blog_rabbitmq
+#    image: rabbitmq:3-management
+#    ports: [ 5672, 15672 ]
 
 networks:
   blog:

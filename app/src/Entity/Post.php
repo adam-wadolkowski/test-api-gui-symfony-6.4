@@ -8,10 +8,13 @@ use App\Repository\PostRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 //use Ramsey\Uuid\Doctrine\UuidGenerator;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
-class Post
+##[ORM\Table(name: "post")]
+
+final class Post
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
@@ -48,9 +51,20 @@ class Post
     )]
     private ?string $content = null;
 
-    #[ORM\Column]
-    #[ORM\OneToOne(mappedBy: "post", targetEntity: Image::class, cascade: ['persist','merge', 'remove'], fetch: 'LAZY', orphanRemoval: true)]
+    #[ORM\Column(type: Types::STRING)]
+    #[Assert\NotBlank(message: "Please upload an image jpg type.")]
+    #[Assert\File(
+        maxSize: '1024k',
+        //mimeTypes: ["image/jpg"],
+        //mimeTypesMessage: 'Please upload a valid jpg image type.'
+    )]
     private ?string $image = null;
+
+ //   private ?UploadedFile $image = null;
+//    #[ORM\Column]
+//    #[ORM\OneToOne(mappedBy: "post", targetEntity: Image::class, cascade: ['persist','merge', 'remove'], fetch: 'LAZY', orphanRemoval: true)]
+//    private ?string $image = null;
+
 
 //    public function __construct()
 //    {
@@ -98,12 +112,29 @@ class Post
         return $this;
     }
 
+//    public function getImage(): ?UploadedFile
+//    {
+//        return $this->image;
+//    }
+//
+//    public function getImageName(): string
+//    {
+//        return $this->image->getFilename();
+//    }
+//
+//    public function setImage(UploadedFile $image): static
+//    {
+//        $this->image = $image;
+//
+//        return $this;
+//    }
+
     public function getImage(): ?string
     {
         return $this->image;
     }
 
-    public function setImage(string $image): static
+    public function setImage(string $image): self
     {
         $this->image = $image;
 
