@@ -22,4 +22,11 @@ final readonly class PostVO
             'image' => $this->post->getImage()
         ];
     }
+
+    public function toArrayId(): array
+    {
+        return [
+            'id' => $this->post->getId()
+        ];
+    }
 }

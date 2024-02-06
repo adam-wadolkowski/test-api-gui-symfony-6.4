@@ -52,11 +52,11 @@ final class Post
     private ?string $content = null;
 
     #[ORM\Column(type: Types::STRING)]
-    #[Assert\NotBlank(message: "Please upload an image jpg type.")]
+    #[Assert\NotBlank(message: "Please upload an image jpg mime type.")]
     #[Assert\File(
         maxSize: '1024k',
-        //mimeTypes: ["image/jpg"],
-        //mimeTypesMessage: 'Please upload a valid jpg image type.'
+        mimeTypes: ["image/jpg", "image/jpeg"],
+        //mimeTypesMessage: 'Please upload a valid jpg image mime type.'
     )]
     private ?string $image = null;
 

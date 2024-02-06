@@ -17,23 +17,23 @@ readonly class PostDto
             minMessage: 'Post title must be at least {{ limit }} characters long.',
             maxMessage: 'Post title cannot be longer than {{ limit }} characters',
         )]
-        public string $title,
+        public ?string $title,
 
         #[Assert\NotBlank(message: "Post content not by blank.")]
         #[Assert\Length(
             min: 20,
             minMessage: 'Post content must be at least {{ limit }} characters long.'
         )]
-        public string $content,
+        public ?string $content,
 
-        #[Assert\NotBlank(message: "Please upload an image jpg type.")]
+        #[Assert\NotBlank(message: "Please upload an image jpg mime type.")]
         #[Assert\File(
             maxSize: '1024k',
-            mimeTypes: ["image/jpg"],
-            mimeTypesMessage: 'Please upload a valid jpg image type.'
+            mimeTypes: ["image/jpg", "image/jpeg"],
+            //mimeTypesMessage: 'Please upload a valid jpg image mime type.'
         )]
-        public string $image,
-        //public readonly UploadedFile $image,
+        public ?string $image,
+        //public UploadedFile $image,
     ) {
     }
 }
