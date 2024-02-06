@@ -12,6 +12,16 @@
                 </a>
             </div>
             <div class="card-body">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('error') %}
+                    <div class="alert alert-error">
+                        {{ message }}
+                    </div>
+                {% endfor %}
                 <h5 class="card-title">Total number of posts: {{ paginator.getTotal }}</h5>
                 <table class="table table-bordered">
                     <tr>
