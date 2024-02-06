@@ -18,7 +18,7 @@ class PostApiController extends AbstractController
     #[Route('/post/{id<\d+>}', name: 'get_post_by_id', methods: ['GET'])]
 //    #[SWG\Response(
 //        response: 200,
-//        description: "Returns the all p",
+//        description: "Returns the all posts",
 //        #[SWG\Schema(
 //            type: "array",
 //            #[SWG\Items(ref=@Model(type=Reward::class, groups={"full"}))]

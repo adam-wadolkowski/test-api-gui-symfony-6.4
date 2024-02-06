@@ -7,7 +7,7 @@ namespace App\Dto;
 //use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class PostDto
+readonly class PostDto
 {
     public function __construct(
         #[Assert\NotBlank(message: "Post title not by blank.")]
@@ -17,14 +17,14 @@ class PostDto
             minMessage: 'Post title must be at least {{ limit }} characters long.',
             maxMessage: 'Post title cannot be longer than {{ limit }} characters',
         )]
-        public readonly string $title,
+        public string $title,
 
         #[Assert\NotBlank(message: "Post content not by blank.")]
         #[Assert\Length(
             min: 20,
             minMessage: 'Post content must be at least {{ limit }} characters long.'
         )]
-        public readonly string $content,
+        public string $content,
 
         #[Assert\NotBlank(message: "Please upload an image jpg type.")]
         #[Assert\File(
@@ -32,7 +32,7 @@ class PostDto
             mimeTypes: ["image/jpg"],
             mimeTypesMessage: 'Please upload a valid jpg image type.'
         )]
-        public readonly string $image,
+        public string $image,
         //public readonly UploadedFile $image,
     ) {
     }
