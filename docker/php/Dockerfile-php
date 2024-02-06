@@ -24,6 +24,7 @@ RUN apt update && apt install -y yarn
 RUN curl -sS http://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
 COPY app/ /var/www
-WORKDIR /var/www
+RUN chown -R www-data:www-data /var/www/public/uploads
 
+WORKDIR /var/www
 #RUN composer install

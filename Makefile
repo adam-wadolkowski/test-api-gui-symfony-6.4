@@ -61,7 +61,7 @@ clean-cache: #remove file from var/cache/ in project
 
 clean-hard:
 	@docker-compose down
-	@sudo rm -rf app/var app/vendor app/node_modules app/public/build app/public/bundles
+	@sudo rm -rf app/var app/vendor app/node_modules app/public/build app/public/bundles app/public/uploads/images/*
 	@docker ps -a
 
 cs: #run snifer code
