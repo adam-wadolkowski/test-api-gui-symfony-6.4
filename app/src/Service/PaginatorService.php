@@ -8,7 +8,7 @@ use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator as OrmPaginator;
 
-class Paginator
+class PaginatorService
 {
     private int $total;
     private int $currentPage;
@@ -19,7 +19,7 @@ class Paginator
     private const ZERO_PAGE_NUMBER = 0;
     private const DEFAULT_LIMIT_ITEMS_ON_PAGE = 5;
 
-    public function paginate(QueryBuilder|Query $query, int $page, int $limit = self::DEFAULT_LIMIT_ITEMS_ON_PAGE): Paginator
+    public function paginate(QueryBuilder|Query $query, int $page, int $limit = self::DEFAULT_LIMIT_ITEMS_ON_PAGE): PaginatorService
     {
         $paginator = new OrmPaginator($query);
 

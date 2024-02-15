@@ -8,6 +8,7 @@ namespace App\Controller\Gui;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Service\FileUploaderService;
+use App\Service\PostEmailService;
 use App\Service\PostService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +32,7 @@ class PostIndexController extends AbstractController
 
     /** @throws TransportExceptionInterface */
     #[Route('/new', name: 'add_blog_post', methods: ['GET', 'POST'])]
-    public function add(Request $request, PostService $postService, FileUploaderService $fileUploaderService): Response
+    public function add(Request $request, PostService $postService, FileUploaderService $fileUploaderService, PostEmailService $emailService): Response
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
@@ -46,7 +47,7 @@ class PostIndexController extends AbstractController
             }
 
             $postService->save($post);
-            $postService->sendEmail();
+            $emailService->sendEmail();
 
             return $this->redirectToRoute('list_blog_posts', [], Response::HTTP_SEE_OTHER);
         }
