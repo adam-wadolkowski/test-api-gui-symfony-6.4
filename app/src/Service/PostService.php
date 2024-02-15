@@ -11,8 +11,6 @@ readonly class PostService
 {
     public function __construct(
         private EntityManagerInterface $em,
-        private PostRepository $post,
-        private PaginatorService $paginator
     ) {
     }
 
@@ -20,10 +18,5 @@ readonly class PostService
     {
         $this->em->persist($post);
         $this->em->flush();
-    }
-
-    public function getPaginatePosts(int $pageNumber): PaginatorService
-    {
-        return $this->paginator->paginate($this->post->getPostsQuery(), $pageNumber);
     }
 }

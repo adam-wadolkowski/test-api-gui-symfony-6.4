@@ -1,11 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
+
+use App\Repository\PostRepository;
 
 class PostPaginatorService
 {
     public function __construct(
-        private PaginatorService $paginator
+        private readonly PaginatorService $paginator,
+        private PostRepository $post
     ) {
     }
     public function getPaginatePosts(int $pageNumber): PaginatorService

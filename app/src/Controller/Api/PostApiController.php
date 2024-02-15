@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
-use Swagger\Annotations as SWG;
+//use Swagger\Annotations as SWG;
 
 #[Route('/api', name: 'api_')]
 class PostApiController extends AbstractController
