@@ -8,3 +8,6 @@ Check `make help` to more information.
 make
 make init
 make help
+```
+
+Run application in web browser on `http://127.0.0.1:8001/` address.
