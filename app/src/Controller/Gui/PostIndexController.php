@@ -9,7 +9,7 @@ use App\Entity\Post;
 use App\Form\PostType;
 use App\Service\FileUploaderService;
 use App\Service\PostEmailService;
-use App\Service\PostPaginatorService;
+use App\Service\PostPaginatorServiceInterface;
 use App\Service\PostServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class PostIndexController extends AbstractController
 {
     #[Route('/', name: 'list_blog_posts', methods: ['GET'])]
-    public function index(Request $request, PostPaginatorService $postPaginatorService): Response
+    public function index(Request $request, PostPaginatorServiceInterface $postPaginatorService): Response
     {
         return $this->render('index.html.twig', [
             'paginator' => $postPaginatorService->getPaginatePosts(

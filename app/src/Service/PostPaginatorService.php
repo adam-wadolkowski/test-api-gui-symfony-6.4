@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Repository\PostRepository;
+use App\Repository\PostRepositoryInterface;
 
-readonly class PostPaginatorService
+readonly class PostPaginatorService implements PostPaginatorServiceInterface
 {
     public function __construct(
         private PaginatorServiceInterface $paginator,
-        private PostRepository $post
+        private PostRepositoryInterface $post
     ) {
     }
     public function getPaginatePosts(int $pageNumber): PaginatorServiceInterface
