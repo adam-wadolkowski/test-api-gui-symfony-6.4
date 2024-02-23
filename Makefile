@@ -53,6 +53,17 @@ down-all: #down all containers in native system
 	@docker rm $$(docker ps -a -q)
 	@docker ps -a
 
+restart:
+	@docker-compose restart
+	@docker ps -a
+	@docker-compose ps -a
+
+restart-hard:
+	@docker-compose down
+	@docker ps -a
+	@docker-compose up -d
+	@docker-compose ps -a
+
 permissions: #change permission to edit project code
 	$(chown)
 
