@@ -55,7 +55,7 @@ final class Post
     #[Assert\NotBlank(message: "Please upload an image jpg mime type.")]
     #[Assert\File(
         maxSize: '1024k',
-        mimeTypes: ["image/jpg"],
+        mimeTypes: ["image/jpeg"],
         //mimeTypesMessage: 'Please upload a valid jpg image mime type.'
     )]
     private ?string $image = null;

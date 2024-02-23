@@ -10,7 +10,7 @@ use App\Form\PostType;
 use App\Service\FileUploaderService;
 use App\Service\PostEmailService;
 use App\Service\PostPaginatorService;
-use App\Service\PostService;
+use App\Service\PostServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,7 +33,7 @@ class PostIndexController extends AbstractController
 
     /** @throws TransportExceptionInterface */
     #[Route('/new', name: 'add_blog_post', methods: ['GET', 'POST'])]
-    public function add(Request $request, PostService $postService, FileUploaderService $fileUploaderService, PostEmailService $emailService): Response
+    public function add(Request $request, PostServiceInterface $postService, FileUploaderService $fileUploaderService, PostEmailService $emailService): Response
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);

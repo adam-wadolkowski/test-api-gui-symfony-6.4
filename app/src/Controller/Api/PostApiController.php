@@ -7,11 +7,10 @@ namespace App\Controller\Api;
 use App\Dto\PostDto;
 use App\Entity\Post;
 use App\Factory\PostFactory;
-use App\Service\PostService;
+use App\Service\PostServiceInterface;
 use App\ValueObject\PostVO;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
 //use Swagger\Annotations as SWG;
@@ -34,7 +33,7 @@ class PostApiController extends AbstractController
     }
 
     #[Route('/post', name: 'add_post_by_id', methods: ['POST'])]
-    public function addPost(#[MapRequestPayload] PostDto $postDto, PostService $postService): JsonResponse
+    public function addPost(#[MapRequestPayload] PostDto $postDto, PostServiceInterface $postService): JsonResponse
     {
         $post = PostFactory::create($postDto);
         $postService->save($post);

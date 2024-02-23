@@ -6,14 +6,14 @@ namespace App\Service;
 
 use App\Repository\PostRepository;
 
-class PostPaginatorService
+readonly class PostPaginatorService
 {
     public function __construct(
-        private readonly PaginatorService $paginator,
+        private PaginatorServiceInterface $paginator,
         private PostRepository $post
     ) {
     }
-    public function getPaginatePosts(int $pageNumber): PaginatorService
+    public function getPaginatePosts(int $pageNumber): PaginatorServiceInterface
     {
         return $this->paginator->paginate($this->post->getPostsQuery(), $pageNumber);
     }
